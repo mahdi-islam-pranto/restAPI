@@ -72,7 +72,8 @@ class _HomePageState extends State<HomePage> {
 
                               return Icon(Icons.check_box_outline_blank);
                             },
-                          )
+                          ),
+                          Text("User Id: ${snapshot.data![index].userId}"),
                         ],
                       );
                     },
