@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Center(
-            child: Text('Discover API',
+            child: Text('Discover APIs',
                 style: TextStyle(fontWeight: FontWeight.bold))),
       ),
       body: Center(
@@ -38,6 +38,15 @@ class _HomePageState extends State<HomePage> {
                         ));
                   },
                   child: const Text("Task API")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Taskpage(),
+                        ));
+                  },
+                  child: const Text("User API")),
             ],
           ),
         ),
