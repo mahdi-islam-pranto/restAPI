@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   final int? id;
   final String? name;
   final String? username;
@@ -8,7 +8,7 @@ class User {
   final String? website;
   final Company? company;
 
-  User({
+  UserModel({
     this.id,
     this.name,
     this.username,
@@ -19,30 +19,37 @@ class User {
     this.company,
   });
 
-  User.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int?,
-        name = json['name'] as String?,
-        username = json['username'] as String?,
-        email = json['email'] as String?,
-        address = (json['address'] as Map<String, dynamic>?) != null
-            ? Address.fromJson(json['address'] as Map<String, dynamic>)
-            : null,
-        phone = json['phone'] as String?,
-        website = json['website'] as String?,
-        company = (json['company'] as Map<String, dynamic>?) != null
-            ? Company.fromJson(json['company'] as Map<String, dynamic>)
-            : null;
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      username: json['username'] as String?,
+      email: json['email'] as String?,
+      address:
+          json['address'] != null ? Address.fromJson(json['address']) : null,
+      phone: json['phone'] as String?,
+      website: json['website'] as String?,
+      company:
+          json['company'] != null ? Company.fromJson(json['company']) : null,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'username': username,
-        'email': email,
-        'address': address?.toJson(),
-        'phone': phone,
-        'website': website,
-        'company': company?.toJson()
-      };
+  static List<UserModel> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => UserModel.fromJson(json)).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'username': username,
+      'email': email,
+      'address': address?.toJson(),
+      'phone': phone,
+      'website': website,
+      'company': company?.toJson(),
+    };
+  }
 }
 
 class Address {
@@ -60,22 +67,25 @@ class Address {
     this.geo,
   });
 
-  Address.fromJson(Map<String, dynamic> json)
-      : street = json['street'] as String?,
-        suite = json['suite'] as String?,
-        city = json['city'] as String?,
-        zipcode = json['zipcode'] as String?,
-        geo = (json['geo'] as Map<String, dynamic>?) != null
-            ? Geo.fromJson(json['geo'] as Map<String, dynamic>)
-            : null;
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      street: json['street'] as String?,
+      suite: json['suite'] as String?,
+      city: json['city'] as String?,
+      zipcode: json['zipcode'] as String?,
+      geo: json['geo'] != null ? Geo.fromJson(json['geo']) : null,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'street': street,
-        'suite': suite,
-        'city': city,
-        'zipcode': zipcode,
-        'geo': geo?.toJson()
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'street': street,
+      'suite': suite,
+      'city': city,
+      'zipcode': zipcode,
+      'geo': geo?.toJson(),
+    };
+  }
 }
 
 class Geo {
@@ -87,11 +97,19 @@ class Geo {
     this.lng,
   });
 
-  Geo.fromJson(Map<String, dynamic> json)
-      : lat = json['lat'] as String?,
-        lng = json['lng'] as String?;
+  factory Geo.fromJson(Map<String, dynamic> json) {
+    return Geo(
+      lat: json['lat'] as String?,
+      lng: json['lng'] as String?,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {'lat': lat, 'lng': lng};
+  Map<String, dynamic> toJson() {
+    return {
+      'lat': lat,
+      'lng': lng,
+    };
+  }
 }
 
 class Company {
@@ -105,11 +123,19 @@ class Company {
     this.bs,
   });
 
-  Company.fromJson(Map<String, dynamic> json)
-      : name = json['name'] as String?,
-        catchPhrase = json['catchPhrase'] as String?,
-        bs = json['bs'] as String?;
+  factory Company.fromJson(Map<String, dynamic> json) {
+    return Company(
+      name: json['name'] as String?,
+      catchPhrase: json['catchPhrase'] as String?,
+      bs: json['bs'] as String?,
+    );
+  }
 
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'catchPhrase': catchPhrase, 'bs': bs};
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'catchPhrase': catchPhrase,
+      'bs': bs,
+    };
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rest_api/screens/userPage.dart';
 
 import 'taskPage.dart';
 
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Taskpage(),
+                          builder: (context) => const Userpage(),
                         ));
                   },
                   child: const Text("User API")),
