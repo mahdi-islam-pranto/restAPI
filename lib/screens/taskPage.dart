@@ -11,6 +11,12 @@ class Taskpage extends StatefulWidget {
 }
 
 class _TaskpageState extends State<Taskpage> {
+  @override
+  void initState() {
+    super.initState();
+    allTasksList.clear();
+  }
+
   List<Tasks> allTasksList = [];
 
   Future<List<Tasks>> fetchTasks() async {
@@ -73,16 +79,23 @@ class _TaskpageState extends State<Taskpage> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 5,
                           ),
-                          Builder(
-                            builder: (context) {
-                              if (snapshot.data![index].completed) {
-                                return const Icon(Icons.check_box);
-                              }
+                          Row(
+                            children: [
+                              Text("User Id: ${snapshot.data![index].userId}"),
+                              Builder(
+                                builder: (context) {
+                                  if (snapshot.data![index].completed) {
+                                    return const Icon(Icons.check_box);
+                                  }
 
-                              return const Icon(Icons.check_box_outline_blank);
-                            },
+                                  return const Icon(
+                                      Icons.check_box_outline_blank);
+                                },
+                              ),
+                            ],
                           ),
-                          Text("User Id: ${snapshot.data![index].userId}"),
+                          const Divider(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       );
                     },
@@ -111,3 +124,33 @@ class Tasks {
       required this.completed,
       required this.userId});
 }
+
+
+// JSON response from https://jsonplaceholder.typicode.com/todos
+
+// [
+//   {
+//     "userId": 1,
+//     "id": 1,
+//     "title": "delectus aut autem",
+//     "completed": false
+//   },
+//   {
+//     "userId": 1,
+//     "id": 2,
+//     "title": "quis ut nam facilis et officia qui",
+//     "completed": false
+//   },
+//   {
+//     "userId": 1,
+//     "id": 3,
+//     "title": "fugiat veniam minus",
+//     "completed": false
+//   },
+//   {
+//     "userId": 1,
+//     "id": 4,
+//     "title": "et porro tempora",
+//     "completed": true
+//   }
+// ]
