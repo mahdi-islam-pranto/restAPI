@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rest_api/screens/allTaskList.dart';
 import 'package:rest_api/screens/userPage.dart';
 
 import 'taskPage.dart';
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const Taskpage(),
                         ));
                   },
-                  child: const Text("Task API")),
+                  child: const Text("Simple Task API")),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -48,6 +49,15 @@ class _HomePageState extends State<HomePage> {
                         ));
                   },
                   child: const Text("User API")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AllTaskList(),
+                        ));
+                  },
+                  child: const Text("Complex Task API")),
             ],
           ),
         ),
